@@ -1,0 +1,153 @@
+### Monitor System:
+
+# shows all processes in tree view
+pstree
+# shows all processes
+ps -aux
+# show top CPU consuming processes
+top
+# shows 10 largest files in current dir
+du -sh * | sort -rn | head
+du -ks * | sort -rn | head
+du -s * | sort -rn | head
+# show files/dir with size in Gigabyte
+du -h  | grep ^[0-9.]*G | sort -n
+# show top ten files/dir with size in Gigabyte M is megabyte and K kilobyte
+du -h |grep ^[0-9.]*G | sort -rn| head -n 10
+# list stalled processes
+pid () { ps -Ax | grep $@ | awk '{print $2="", $3="", $0}'; } 
+# list hardware
+lshw
+# list cpu info
+cat /proc/cpuinfo
+# monitor network
+iftop
+# memory usage of process
+pmap -x
+# system information
+inxi -v5
+
+### Task:
+
+# to manage todos and appointments
+calcurse
+# find date 3 weeks from now
+date -d "3 weeks"
+
+
+### Install:
+
+# list of installed software
+LIST=$(pacman -Sl); for ARG in $(pacman -Qq); do echo "$LIST" | grep " $ARG "; done
+# list of executable
+find /path -perm /u+x  -ls
+# list packages that require search term
+pacman -Qi xulrunner | grep Required
+# optimize pacman database
+sudo pacman-optimize && sync
+# backup system.
+tar -cvzf backup-2010-05-03.tgz --exclude=/bin --exclude=/boot --exclude=/dev --exclude=/lib --exclude=/lib64 --exclude=/lost+found --exclude=/media --exclude=/mnt --exclude=/opt --exclude=/proc --exclude=/root --exclude=/sbin --exclude=/srv --exclude=/sys --exclude=/tmp --exclude=/usr --exclude=/var --exclude=/home/hubi/entertainment/music --exclude=/home/hubi/entertainment/videos --exclude=/home/hubi/entertainment/hoer --exclude=backup-2010-05-03.tgz --exclude=*.mp3 --exclude=*.avi --eclude=*.iso --exclude=*.mpg --exclude=*.mpeg --exclude=*.MOV --exclude=*.mov --exclude=/home/hubi/tmp/SteamApps /
+
+### Misc:
+
+# make aliases also work for sudo
+alias sudo='A=`alias` sudo '
+# create parent directories if they dont exist
+mkdir -p a/b/c
+# should play your new movies better than dvd://.
+mplayer -nocache dvdnav://
+# play dvd with menu and mouse support
+hmplayer -mouse-movements dvdnav://
+# convert flash video to mp3
+ffmpeg -i filename.FLV -ar 44100 filename.MP3
+# convert flash video to mp3
+ffmpeg -i input.flv -ar 44100 -ab 192k -ac 2 output.mp3
+# convert flash video to mp4
+ffmpeg -i filename.FLV -qmin 2 -qmax 5 -ar 22050 filename.MP4
+# turn off DPMS ( when watching flash to prevent screen from blanking )
+xset -dpms
+# when watching flash to prevent screen from blanking
+xset s off
+# This reads a sequence of 500 bytes from /dev/urandom and writes them
+# to /tmp/randnums.
+dd if=/dev/urandom of=/tmp/randnums bs=1 count=500
+# Make urxvt have tabs ( or add to .Xdefaults: URxvt.perl-ext-common: default,tabbed)
+# ^shift cursor-left or cursor-right switches tabs,
+# ^shift cursor-down creates new tab.
+urxvt -pe tabbed
+# update time
+sudo ntpdate -u pool.ntp.org
+# get ascii table
+man ascii
+# simulate typing.
+dmesg|while read x;do for((i=0;i<${#x};i++));do echo -n "${x:$i:1}";sleep .06;done;echo;done
+# lists only files not directories
+ls -p | grep -v "/"
+# or the equivalent sed version
+ls -p ¦ sed '/\//d'
+# copy file with added filename
+cp filename{,.bak}
+# convert from base 2 to decimal
+echo "obase=10; ibase=2; 10000110"|bc
+# rot13
+(echo tert.havkwhaxvr@arg | tr a-z@. n-za-m.@)
+# watch youtube directly in mplayer
+id="dMH0bHeiRNg";mplayer -fs http://youtube.com/get_video.php?video_id=$id\&t=$(curl -s http://www.youtube.com/watch?v=$id | sed -n 's/.*, "t": "\([^"]*\)", .*/\1/p')
+# record bash session
+script hardcopy.txt
+# record bash session with timing info
+script hardcopy.txt -t 2> timingfile
+# replay session with
+scriptreplay timingfile hardcopy.txt
+# securely delete file: -u option deletes
+shred -z -u filename
+# find hosts in local network
+nmap -sP 192.168.178.1-255
+# or
+nmap -sP 192.168.178.0/24
+# message over lan
+write
+# start another Xserver on F8
+startx -- :1
+# start another Xserver on F8 with custom startup
+xs -- :1
+#script to convert wallpapers to ascii
+#!/bin/bash
+reset
+ROWS=$((`tput lines` - 1))
+while true ; do
+	for i in $HOME/.wallpaper/*.bmp ; do
+		img2txt -W `tput cols` -H ${ROWS} $i
+#		img2txt -W 133 -H 49 $i
+		sleep 10
+		clear
+	done
+done
+# mount ntfs partition
+sudo mount -t ntfs-3g /dev/sdb1 /media/ext/
+
+# rip dvd
+mencoder dvd://2 -ovc lavc -lavcopts vcodec=mpeg4:vhq:vbitrate="1200" -vf scale -zoom -xy 640 -oac mp3lame -lameopts br=128 -o /nas/videos/my-movies/example/track2.avi
+mencoder -dvd-device /dev/sr0 dvd://1 -chapter 2-2 -ovc lavc -lavcopts vcodec=mpeg4:vhq:vbitrate="1200" -vf scale -oac mp3lame -lameopts br=320 -nosub -alang de -o track1.avi
+
+# disable terminal display
+(PS. If you don't know, CTRL+S sends XOFF to the terminal, and CTRL+Q sends XON. Try sending XOFF, typing some chars (any chars), then sending XON. It's great to look at scrolling data and stuff)
+
+# fix permissions for directories and files using find
+#A badly written script bundled with a game caused everything my home folder (recursively) to change it's permissions to 775. So using find, I changed all the files permissions to 644, then edited the command to use 755 for directories.
+find . -type d -exec chmod 755 {} \;
+find . -type f -exec chmod 644 {} \;
+
+### Help:
+
+# Display a summary of a command (rather than the entire manual)
+whatis
+# Display a list of commands that pertain to (are apropos to) a keyword
+apropos
+# Display information about the location of a command: the executable, the source code (if any), and the man pages.
+whereis
+# Display which version of a command will execute (for when there are two, or more, commands with the same name installed on the system).
+which
+
+# Crop image
+convert 2012-01-29-215332_4096x1152_scrot.png -crop 1024x576 +repage vim_help.png
