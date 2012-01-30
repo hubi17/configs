@@ -113,3 +113,22 @@ ttde.keymaster
 vic
 .config/awesome/themes/awesome-solarized/
 .birthdays
+
+# ignore everything
+*
+
+# except the following
+!.awesome
+!.config
+!.ncmpcpp
+!.Xresources
+!.abcde.conf
+!.bash_aliases
+!.bashrc
+!.dircolors
+!.gitignore
+!.screenrc
+!.vimrc
+!.xinitrc
+!README
+!useful_commands
