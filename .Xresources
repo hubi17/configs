@@ -1,3 +1,4 @@
+
 !! drop in Solarized colorscheme for Xresources/Xdefaults
 
 !!SOLARIZED HEX     16/8 TERMCOL  XTERM/HEX   L*A*B      RGB         HSB
@@ -37,6 +38,7 @@
 #define S_green         #859900
 
 *background:            S_base03
+!! colour of written text
 *foreground:            S_base00
 *fading:                40
 *fadeColor:             S_base03
@@ -78,12 +80,14 @@
 
 ! rxvt-unicode ---------------------------------------------------------------
 
-!URxvt.transparent:	true
+URxvt.lineSpace: 0
+URxvt.letterSpace: 0
+!URxvt.lineSpace: 1
+!URxvt.letterSpace: -1
 URxvt.geometry:		125x40
-!URxvt.cursorColor:	white
 URxvt.underlineColor:	yellow
-URxvt.font:		xft:Terminus:pixelsize=14:antialias=false
-URxvt.boldFont:		xft:Terminus:bold:pixelsize=14:antialias=false
+URxvt.font:			xft:Inconsolata:medium:size=11.5:antialias=true
+URxvt.boldFont:		xft:Inconsolata:bold:size=11.5:antialias=true
 !URxvt.perl-ext-common:	default,tabbed
 URxvt.scrollBar:	false
 URxvt.scrollstyle:	plain
@@ -92,7 +96,8 @@ URxvt.termname:		rxvt-unicode		/* -tn: sets $TERM */
 URxvt.saveLines:	8192
 URxvt.internalBorder:	0
 URxvt.externalBorder:	0
-URxvt*cursorColor:	#DCDCCC
+! Correct bold colours
+URxvt.intensityStyles: false
 ! Clickable links
 URxvt.perl-ext-common:  default,matcher
 URxvt.urlLauncher:      /usr/bin/firefox
@@ -104,16 +109,13 @@ xterm*internalBorder:        0
 xterm*loginShell:         true
 xterm*scrollBar:         false
 xterm*cursorBlink:       false
-!xterm*geometry:         80x26
 xterm*saveLines:         65535
 xterm*dynamicColors:        on
 xterm*highlightSelection: true
 ! Appearance
 xterm*utf8:             2
 xterm*eightBitInput: true
-!xterm*font:        -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
 xterm*font:        -xos4-terminus-medium-*-*-*-32-*-*-*-*-*-*-*
-!xterm*boldFont:    -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-*-*
 xterm*boldFont:    -xos4-terminus-bold-*-*-*-32-*-*-*-*-*-*-*
 xterm*cursorColor: #DCDCCC
 
@@ -124,3 +126,22 @@ xpdf*antialias:		yes
 xpdf*foreground:	black
 xpdf*background:	white
 xpdf*urlCommand:	/usr/bin/firefox %s
+
+! Font ------------------------------------------------------------------------
+
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.dpi: 96
+Xft.rgba: rgb
+
+! dzen2 -----------------------------------------------------------------------
+
+!dzen2.font:       -*-terminus-*-*-*-*-16-*-*-*-*-*-*-*
+dzen2.font:		xft:Inconsolata:medium:size=10
+
+! dmenu -----------------------------------------------------------------------
+
+dmenu.font:		xft:Inconsolata:medium:size=12

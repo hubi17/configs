@@ -36,13 +36,19 @@ xrdb -merge ~/.Xresources
 # default is to start awesomewm normally.
 if [[ $1 == "full" ]]
 then
-	exec awesome -c ~/.config/awesome/fullrc.lua
-elif [[ $1 == "slim" ]]
+	exec awesome -c ~/.config/awesome/fullrc.lua --no-argb
+elif [[ $1 == "dwm" ]]
 then
-	exec awesome -c ~/.config/awesome/slimrc.lua
-elif [[ $1 == "nbg" ]]
+	while true; do
+		xsetroot -name "$( date +"%F %R" )"
+		sleep 1m	#update every minute
+	done &
+	dunst &
+	exec dwm
+elif [[ $1 == "xmonad" ]]
 then
-	exec awesome -c ~/.config/awesome/nbgrc.lua
+	xsetroot -cursor_name left_ptr
+	exec xmonad
 else
 	exec awesome
 fi

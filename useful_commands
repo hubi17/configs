@@ -6,6 +6,8 @@ pstree
 ps -aux
 # show top CPU consuming processes
 top
+# show curses based du
+ncdu
 # shows 10 largest files in current dir
 du -sh * | sort -rn | head
 du -ks * | sort -rn | head
@@ -47,6 +49,8 @@ pacman -Qi xulrunner | grep Required
 sudo pacman-optimize && sync
 # backup system.
 tar -cvzf backup-2010-05-03.tgz --exclude=/bin --exclude=/boot --exclude=/dev --exclude=/lib --exclude=/lib64 --exclude=/lost+found --exclude=/media --exclude=/mnt --exclude=/opt --exclude=/proc --exclude=/root --exclude=/sbin --exclude=/srv --exclude=/sys --exclude=/tmp --exclude=/usr --exclude=/var --exclude=/home/hubi/entertainment/music --exclude=/home/hubi/entertainment/videos --exclude=/home/hubi/entertainment/hoer --exclude=backup-2010-05-03.tgz --exclude=*.mp3 --exclude=*.avi --eclude=*.iso --exclude=*.mpg --exclude=*.mpeg --exclude=*.MOV --exclude=*.mov --exclude=/home/hubi/tmp/SteamApps /
+# backup with rsync
+rsync -avuh --append /home/hubi/entertainment/videos/ /media/ext/hubi/movies/
 
 ### Misc:
 
@@ -151,3 +155,9 @@ which
 
 # Crop image
 convert 2012-01-29-215332_4096x1152_scrot.png -crop 1024x576 +repage vim_help.png
+
+# Extract frames from gif
+convert animated.gif frames%03d.png 
+
+# Number lines
+nl

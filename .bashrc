@@ -56,13 +56,13 @@ shopt -s histappend
 HISTCONTROL=erasedups:ignorespace
 #HISTIGNORE="&:[ ]*:exit"
 #HISTIGNORE="cd*:ls*:ll*"
-HISTIGNORE="cd*"
+HISTIGNORE="cd*:ls:ls *"
 HISTFILESIZE=100000
 HISTSIZE=100000
 
 # Colourise ls for filestypes
 export CLICOLORS=1
-if [ -e /bin/dircolors ]; then
+if [ -e /usr/bin/dircolors ]; then
     eval $(dircolors -b ~/.dircolors)
 fi
 
@@ -73,7 +73,7 @@ fi
 #fi
 
 # Colourise grep
-export GREP_COLOR="1;33"
+export GREP_COLOR="01;31"
 alias grep='grep --color=auto'
 
 # Lesspipe, allowing less to view archives
@@ -130,3 +130,6 @@ source ~/.git-completion.bash
 
 # include dir in java classpath
 export CLASSPATH=$CLASSPATH:/home/hubi/programming/java/ssh_debug/
+
+# powerline
+#. /usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh

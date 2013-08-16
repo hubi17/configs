@@ -1,3 +1,17 @@
+" Set more advanced features and dont be compatible to vi
+set nocompatible
+set encoding=utf-8
+set fileencoding=utf-8
+
+" disable arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+" Load pathogen
+"call pathogen#infect()
+
 " Set prefered colourscheme
 "colorscheme zenburn
 set background=dark
@@ -6,9 +20,6 @@ colorscheme solarized
 " Enable cursorline
 set cursorline
 
-" Set more advanced features and dont be compatible to vi
-set nocompatible
-
 " Switch on syntax highlighting
 "let mysyntaxfile = "~/.vim/mysyntax/mysyntax.vim"
 syntax on
@@ -16,7 +27,11 @@ syntax on
 set cindent
 set autoindent
 set smartindent
-set nohls
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+"set nohls
+set hls
 set wildmenu
 set foldmethod=syntax
 
@@ -43,7 +58,8 @@ set laststatus=2
 set showcmd
 
 " Show the current mode
-set showmode
+"set showmode
+set noshowmode
 
 " Keep some stuff in the history
 set history=100
@@ -126,28 +142,39 @@ augroup JumpCursorOnEdit
  \ endif
 augroup END
 
-" java
-let java_highlight_java_lang_ids=1
-" let java_highlight_functions="indent"
-let java_highlight_functions="style"
-hi link javaParen Function
-hi link javaParen1 Function
-hi link javaParen2 Function
-" turn on when using javascript, css or visual basic script
-" let java_javascript=1
-" let java_css=1
-" let java_vb=1
-"au FileType java colorscheme darkeclipse
-au FileType java highlight clear
-au FileType java set background=dark
-au FileType java redraw! "needed so that background is properly drawn
-
 " LaTeX
 "au FileType tex set ts=2
 au FileType tex set noautoindent
+
+" html
+au FileType html set tabstop=4
+au FileType html set shiftwidth=4
+au FileType html set expandtab
+
+" c/cpp
+au FileType c set nu
+au FileType cpp set nu
+au FileType h set nu
+au FileType hpp set nu
 
 " vimwiki configuration
 let wiki = {}
 let wiki.path = '~/misc/vimwiki/'
 let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
 let g:vimwiki_list = [wiki]
+
+" immediately update statusline
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
+
+" powerline stuff
+let g:Powerline_symbols = 'fancy'
+if has('gui_running')
+	set guifont=Inconsolata\ for\ Powerline\ Medium\ 12
+endif
